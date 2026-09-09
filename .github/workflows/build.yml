@@ -31,6 +31,5 @@ jobs:
         env:
           # Repo -> Settings -> Secrets and variables -> Actions
           UV_PUBLISH_URL: ${{ vars.GLUEX_PYPI_PUBLISH_URL }}      # variable: upload endpoint
-          UV_PUBLISH_USERNAME: ${{ secrets.GLUEX_PYPI_USERNAME }}  # secret (use __token__ for token auth)
-          UV_PUBLISH_PASSWORD: ${{ secrets.GLUEX_PYPI_PASSWORD }}  # secret (the password or token value)
+          UV_PUBLISH_TOKEN: ${{ secrets.GLUEX_PYPI_TOKEN }}   # secret (the password or token value)
         run: uv publish
