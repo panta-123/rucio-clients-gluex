@@ -1,0 +1,28 @@
+# GlueX rucio-clients build harness (uv-managed).
+#
+# Not the client itself: this fetches the upstream `rucio-clients` sdist from PyPI,
+# applies the GlueX patches in ./patches, renames the distribution, adds extra
+# dependencies, stamps a valid PEP 440 version, and rebuilds the wheel.
+#
+# Published distribution : rucio-clients-gluex
+# Import name (unchanged): rucio
+# Published version      : <upstream-version>.post<build-number>  e.g. 41.2.2.post1
+
+[project]
+name = "gluex-rucio-clients-builder"
+version = "0.1.0"
+description = "Build harness that repackages upstream rucio-clients as the GlueX client."
+requires-python = ">=3.11"          # need tomllib (stdlib) to read this file
+dependencies = []                    # harness uses only the standard library
+
+[tool.uv]
+package = false                      # nothing to install; this is a task runner
+
+# ---- single source of truth for what we build ------------------------------
+# Bump upstream-version to track a new rucio release.
+# Bump build-number when you change patches/deps but keep the same upstream.
+[tool.gluex-rucio]
+upstream-version = "41.2.2"
+build-number = 1
+distribution-name = "rucio-clients-gluex"
+extra-dependencies = ["pyjwt>=2.0.0"]
