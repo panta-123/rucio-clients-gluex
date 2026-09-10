@@ -21,7 +21,12 @@ import shutil
 import subprocess
 import sys
 import tarfile
-import tomllib
+
+try:
+    import tomllib  # Python 3.11+
+except ModuleNotFoundError:  # Python 3.9 / 3.10
+    import tomli as tomllib
+
 import urllib.request
 from pathlib import Path
 

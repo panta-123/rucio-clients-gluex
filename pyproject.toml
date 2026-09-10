@@ -12,9 +12,10 @@
 name = "gluex-rucio-clients-builder"
 version = "0.1.0"
 description = "Build harness that repackages upstream rucio-clients as the GlueX client."
-requires-python = ">=3.11"          # need tomllib (stdlib) to read this file
-dependencies = []                    # harness uses only the standard library
-
+requires-python = ">=3.9"          # need tomllib (stdlib) to read this file
+dependencies = [
+    "tomli; python_version < '3.11'",            # tomllib is stdlib only on 3.11+
+]
 [tool.uv]
 package = false                      # nothing to install; this is a task runner
 
@@ -22,7 +23,7 @@ package = false                      # nothing to install; this is a task runner
 # Bump upstream-version to track a new rucio release.
 # Bump build-number when you change patches/deps but keep the same upstream.
 [tool.gluex-rucio]
-upstream-version = "41.2.2"
+upstream-version = "40.2.0"
 build-number = 1
 distribution-name = "rucio-clients-gluex"
 extra-dependencies = ["pyjwt>=2.0.0"]
